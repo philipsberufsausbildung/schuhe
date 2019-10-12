@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Schuhbestellung</title>
+    <title>Schuhbestellung Praktikanten Daniel ist cool</title>
 	<style>
 		table {
 			font-family: arial, sans-serif;
@@ -40,14 +41,14 @@
 	</style>
   </head>
   <body>
-	<h1 align="center">Schuhbestellung Praktikanten</h1>
+	<h1 align="center">Schuhbestellung Praktikanten Daniel ist cool</h1>
 	<h3 align="center">Si-Halbschuh S3 ARTHUR schwarz</h3>
 	<p>
 	<table id="myTable">
 		<tr>
 			<th>Artikelnummer</th>
 			<th>Gr&ouml&szlige</th>
-			<th>Anzahl Paare</th>
+			<th>Anzahl</th>
 		</tr>
 		<tr>
 			<td>A442636</td>
@@ -123,20 +124,20 @@
 	<script>
 	function myFunction() {
 		var body_str = "Moin Herr Knaack,%0Abitte bestellen Sie folgende Schuhe:%0A%0A";
-	
+		
 		var x = document.getElementById("myTable").rows;
 		var AnzahlBestellungen = 0;
+
+		<!-- jede Zeile durchgehen -->
 		for(var i = 1; i < x.length; i++){
-			<!-- jede Zeile durchgehen -->
-			var Schuhname = x[i].children[0].innerText;
-			var Größe = x[i].children[1].innerText;
-			var Anzahl = x[i].children[2].firstChild.value;
-			
+			var Anzahl = x[i].children[x[i].childElementCount - 1].firstChild.value;
 			if(Anzahl != "" && Anzahl != "0"){
 				AnzahlBestellungen++;
-				body_str += Schuhname + "     Größe: " + Größe + "     " + Anzahl;
-				if(Anzahl == 1)body_str += " Paar%0A";
-				else body_str += " Paare%0A";
+				<!-- jede Spalte durchgehen -->
+				for(var ii = 0; ii < x[i].childElementCount - 1; ii++){
+					if(x[i].children[ii].innerText != "") { body_str += x[0].children[ii].innerText + ": " + x[i].children[ii].innerText + "     "; }
+				}
+				body_str += Anzahl + " Stück%0A";
 			}
 		}
 		body_str += "%0AVielen Dank und Viele Grüße!%0A%0A";
@@ -145,7 +146,7 @@
 		if(AnzahlBestellungen > 0)
 			window.open(link);
 		else
-			alert("Bitte wähle zuerst aus, welche Schuhe bestellt werden sollen!");
+			alert("Bitte wähle zuerst aus, was bestellt werden soll!");
 	}
 	</script>	
   </body>
